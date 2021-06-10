@@ -1,5 +1,6 @@
 <template>
   <div id="app" class="container">
+    <!-- >
     <div class="input-group input-group-lg bottom">
       <div class="input-group-prepend">
         <span class="input-group-text">Search</span>
@@ -9,7 +10,6 @@
         @keyup.prevent="search"
         v-model="query" />
     </div>
-    
     <div  class="card-row">
     <div v-for="(value, index) in data" 
       :key="index"
@@ -31,10 +31,18 @@
   <button v-on:click="counter += 1">Add 1</button>
   <p>The button above has been clicked {{ counter }} times.</p>
 </div>
+<-->
+
+
 
  <div id="example-2">
-  <button v-on:click="addMore">Call Elastic</button>
+   <input type="text" v-model="msg">
+  <button v-on:click="addMore">Search</button>
+  
   <p>Result: {{ callResult }} </p>
+</div>
+<div>
+  <textarea v-model="message" ></textarea>
 </div>
   </div>
 </template>
@@ -49,15 +57,16 @@ export default {
       query: '',
       counter : 0,
       callResult : '',
+      message: 'Orale carnalito',
       element: '',
     }
   },
   methods: {
     search() {
-        axios.get('http://localhost:5000/search?q='+this.query)
+        /*axios.get('http://localhost:5000/search?q='+this.query)
               .then(response => {
                 this.data = response.data;
-          })
+          })*/
     },
     addMore() {
       alert("Calling Elastic");
@@ -65,6 +74,8 @@ export default {
     .then(response => {
       // JSON responses are automatically parsed.
       this.callResult = response.data;
+      console.log(this.callResult.esta.mappings.properties);
+      this.message = this.callResult.esta.mappings.properties;
     })
     .catch(e => {
       this.errors.push(e)
