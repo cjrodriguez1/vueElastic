@@ -1,42 +1,8 @@
 <template>
   <div id="app" class="container">
-    <!-- >
-    <div class="input-group input-group-lg bottom">
-      <div class="input-group-prepend">
-        <span class="input-group-text">Search</span>
-      </div>
-      <input type="text" 
-        class="form-control col-md-6" 
-        @keyup.prevent="search"
-        v-model="query" />
-    </div>
-    <div  class="card-row">
-    <div v-for="(value, index) in data" 
-      :key="index"
-      :ref="`card_${index}`"
-         class="card">
-      
-      <img class="card-image" :src="value._source.url">
-      
-      <div class="card-footer">
-        <h3 class="card-title">{{value._source.cast_name}}</h3>
-        <p class="card-text">by 
-          <span class="card-author">{{value._source.og_name}}</span>
-        </p>
-      </div>
-    </div>
-  </div>
-
-  <div id="example-1">
-  <button v-on:click="counter += 1">Add 1</button>
-  <p>The button above has been clicked {{ counter }} times.</p>
-</div>
-<-->
-
-
 
  <div id="example-2">
-   <input type="text" v-model="msg">
+   <input type="text" v-model="id">
   <button v-on:click="addMore">Search</button>
   
   <p>Result: {{ callResult }} </p>
@@ -54,6 +20,7 @@ import axios from 'axios';
 export default {
   data() {
     return {
+      id:'',
       query: '',
       counter : 0,
       callResult : '',
@@ -63,14 +30,11 @@ export default {
   },
   methods: {
     search() {
-        /*axios.get('http://localhost:5000/search?q='+this.query)
-              .then(response => {
-                this.data = response.data;
-          })*/
     },
     addMore() {
       alert("Calling Elastic");
-      axios.get(`http://localhost:9200/esta/` + this.element)
+      var url = 'http://localhost:9200/esta/' + this.id;
+      axios.get(url + this.element)
     .then(response => {
       // JSON responses are automatically parsed.
       this.callResult = response.data;
@@ -80,14 +44,7 @@ export default {
     .catch(e => {
       this.errors.push(e)
     })
-      //this.callResult += "Orale Carnalito ";
-      /*#################################################
-      axios.get('http://localhost:9200/esta/', {
-  //data: JSON.stringify(query),
-}).then((res) => {
-  console.log(res);
-});
-#######################################################*/
+      
     },
   }
 }
