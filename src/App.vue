@@ -9,7 +9,7 @@
   <spam style="font-weight:bold">ID:</spam> <input type="text"  v-model="id" required> 
   <button v-on:click="addMore">Search</button>
   
-  <p> {{ callResult }} </p>
+  
 </div>
 <div id="resultsArea" style="display:none">
   <div><spam style="font-weight:bold">Date:</spam> <input type="text"  v-model="date"></div>
@@ -19,6 +19,8 @@
   <div><spam style="font-weight:bold">Direction:</spam> <input type="text"  v-model="direction"></div>
   <div><spam style="font-weight:bold">Thread:</spam> <input type="text"  v-model="thread"></div>
   <div><spam style="font-weight:bold">Event:</spam> <input type="text"  v-model="event"></div>
+
+  <spam style="font-weight:bold">Raw JSON:</spam> <p> {{ callResult }} </p>
  
 </div>
   </div>
